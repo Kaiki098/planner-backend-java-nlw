@@ -1,2 +1,6 @@
-package com.rocketseat.planner.trip;public record TripCreateResponse() {
+package com.rocketseat.planner.trip;
+
+import java.util.UUID;
+
+public record TripCreateResponse(UUID tripId) {
 }
