@@ -1,9 +1,6 @@
 package com.rocketseat.planner.trip;
 
-import com.rocketseat.planner.activity.ActivityData;
-import com.rocketseat.planner.activity.ActivityRequestPayload;
-import com.rocketseat.planner.activity.ActivityResponse;
-import com.rocketseat.planner.activity.ActivityService;
+import com.rocketseat.planner.activity.*;
 import com.rocketseat.planner.link.LinkData;
 import com.rocketseat.planner.link.LinkRequestPayload;
 import com.rocketseat.planner.link.LinkResponse;
@@ -124,9 +121,16 @@ public class TripController {
 
     @GetMapping("/{id}/activities")
     public ResponseEntity<List<ActivityData>> getAllActivities(@PathVariable UUID id) {
-        List<ActivityData> participants = this.activityService.getAllActivitiesFromEvent(id);
+        List<ActivityData> activities = this.activityService.getAllActivitiesFromEvent(id);
 
-        return ResponseEntity.ok(participants);
+        return ResponseEntity.ok(activities);
+    }
+
+    @GetMapping("/{id}/activities/organized")
+    public ResponseEntity<List<OrganizedActivitiesData>> getAllActivitiesOrganized(@PathVariable UUID id) {
+        List<OrganizedActivitiesData> organizedActivities = this.activityService.getAllActivitiesFromEventOrganized(id);
+
+        return ResponseEntity.ok(organizedActivities);
     }
 
     @GetMapping("/{id}/participants")

@@ -9,3 +9,4 @@ public record ActivityData(
         LocalDateTime occurs_at
 ) {
 }
+

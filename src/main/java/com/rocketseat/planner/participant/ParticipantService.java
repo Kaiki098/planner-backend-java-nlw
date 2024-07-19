@@ -17,7 +17,6 @@ public class ParticipantService {
 
         this.repository.saveAll(participants);
 
-        System.out.println("Primeiro participant: " + participants.getFirst().getId());
     }
 
     public ParticipantCreateResponse registerParticipantToEvent(String email, Trip trip) {
