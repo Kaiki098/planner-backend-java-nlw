@@ -1,7 +1,6 @@
 package com.rocketseat.planner.link;
 
 import com.rocketseat.planner.trip.Trip;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,8 +8,11 @@ import java.util.UUID;
 
 @Service
 public class LinkService {
-    @Autowired
-    private LinkRepository repository;
+    private final LinkRepository repository;
+
+    public LinkService(LinkRepository linkRepository) {
+        this.repository = linkRepository;
+    }
 
     public LinkResponse registerLink(LinkRequestPayload payload, Trip trip) {
         Link newLink = new Link(payload.title(), payload.url(), trip);

@@ -9,7 +9,6 @@ import com.rocketseat.planner.participant.ParticipantCreateResponse;
 import com.rocketseat.planner.participant.ParticipantData;
 import com.rocketseat.planner.participant.ParticipantRequestPayload;
 import com.rocketseat.planner.participant.ParticipantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,17 +22,25 @@ import java.util.UUID;
 @RequestMapping("/trips")
 public class TripController {
 
-    @Autowired
-    private ParticipantService participantService;
+    private final ParticipantService participantService;
 
-    @Autowired
-    private ActivityService activityService;
+    private final ActivityService activityService;
 
-    @Autowired
-    private LinkService linkService;
+    private final LinkService linkService;
 
-    @Autowired
-    private TripRepository repository; // Não interagir com repository só com service
+    private final TripRepository repository; // Não interagir com repository só com service
+
+    public TripController(
+            ParticipantService participantService,
+            ActivityService activityService,
+            LinkService linkService,
+            TripRepository repository
+    ) {
+        this.participantService = participantService;
+        this.activityService = activityService;
+        this.linkService = linkService;
+        this.repository = repository;
+    }
 
     @PostMapping
     public ResponseEntity<TripCreateResponse> createTrip(@RequestBody TripRequestPayload payload) {
