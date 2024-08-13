@@ -85,7 +85,7 @@ public class TripController {
             rawTrip.setIsConfirmed(true);
 
             this.repository.save(rawTrip);
-            this.participantService.triggerConfirmationEmailToParticipants(id);
+            this.participantService.triggerConfirmationEmailToParticipants(rawTrip);
 
             return ResponseEntity.ok(rawTrip);
         }
@@ -103,8 +103,9 @@ public class TripController {
             ParticipantCreateResponse participantCreateResponse = this.participantService.registerParticipantToEvent(payload.email(), rawTrip);
 
             if (rawTrip.getIsConfirmed()) {
-                this.participantService.triggerConfirmationEmailToParticipant(payload.email());
+                this.participantService.triggerConfirmationEmailToParticipant(payload.email(), rawTrip);
             }
+
             return ResponseEntity.ok(participantCreateResponse);
         }
 
